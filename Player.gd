@@ -15,13 +15,16 @@ const NUM_DIRS = 4
 
 var lay = 0
 var dir = 0
-var ROTATIONS = [
-	["u^", "u>", "uv", "u<"],				# standing up 0
+var ROTATION_GLYPHS = [
+	["u^", "u>", "uv", "u<"],	# standing up 0
 	["d^", "d>", "dv", "d<"]	# laying down 1
+]
+var ROTATIONS = [ # hold info for how to turn
+	
 ]
 
 func _physics_process(delta):
-	print(ROTATIONS[lay][dir])
+	#print(ROTATION_GLYPHS[lay][dir])
 	apply_movement(get_movement_vector())
 	handle_rotation()
 	handle_jump()
@@ -43,7 +46,6 @@ func handle_rotation():
 		# 0 - 1 => 3. -1 mod is like adding mod value - 1
 		dir += 1 if dir_input > 0 else (NUM_DIRS - 1)
 		dir %= NUM_DIRS
-	
 	# Handle laying down or standing up
 	if lay == UPRIGHT and Input.is_action_just_pressed("lay_down"):
 		# print("bruh")

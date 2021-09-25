@@ -1,18 +1,12 @@
-extends KinematicBody
+extends Spatial
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-export var speed = 0.00001
-var velocity =- Vector3.ZERO
-
-# Called when the node enters the scene tree for the first time.
+# Get points based on screen size
 func _ready():
-	pass # Replace with function body.
+	pass
 
+# Want to set up area collision
+# Want to randomly choose a direction to move in and orient to
+# should dynamically spawn and despawn if successfully made to the otherside
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	velocity.x += speed
-	velocity = move_and_slide(velocity, Vector3.UP)
+func _process(delta):
+	translation = Vector3(translation.x + 0.01, translation.y, translation.z)
