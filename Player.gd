@@ -15,17 +15,22 @@ const NUM_DIRS = 4
 
 var lay = 0
 var dir = 0
-var ROTATION_GLYPHS = [
+const ROTATION_GLYPHS = [
 	["u^", "u>", "uv", "u<"],	# standing up 0
 	["d^", "d>", "dv", "d<"]	# laying down 1
 ]
-var ROTATIONS = [ # hold info for how to turn
+const ROTATIONS = [ # hold info for how to turn
 	
 ]
 
 func _physics_process(delta):
 	#print(ROTATION_GLYPHS[lay][dir])
-	apply_movement(get_movement_vector())
+
+	var movement_vector = get_movement_vector()
+	apply_movement(movement_vector)
+	
+	if movement_vector != Vector3.ZERO:
+		pivot.look_at(translation + movement_vector, Vector3.UP)
 	handle_rotation()
 	handle_jump()
 	apply_gravity(delta)
@@ -67,4 +72,3 @@ func handle_jump():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
